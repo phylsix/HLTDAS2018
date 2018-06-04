@@ -1,8 +1,8 @@
-# HLTDAS2018
-HLT trigger exercise CMS DAS @ Fermilab LPC, January 2018
+# HLTHATS2018
+HLT trigger exercise CMS HATS @ Fermilab LPC, June 2018
 
-See DAS twiki for detailed instructions:
-https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCMSDataAnalysisSchoolLPC2018TriggerExercise
+See HATS twiki for detailed instructions:
+https://twiki.cern.ch/twiki/bin/viewauth/CMS/TriggerHATSatLPC2018
 
 ## Jupyter noteboooks
 
@@ -22,15 +22,15 @@ When you log into cmslpc, add a `-L` option to your ssh command:
 
 Then you can make your area
 
-```    
-source /cvmfs/cms.cern.ch/cmsset_default.csh
-setenv SCRAM_ARCH slc6_amd64_gcc530
+```bash
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+export SCRAM_ARCH=slc6_amd64_gcc630
 cd nobackup/
-cmsrel CMSSW_9_2_15
-cd CMSSW_9_2_15/src
+cmsrel CMSSW_9_4_8
+cd CMSSW_9_4_8/src
 cmsenv
-git clone https://github.com/jmduarte/HLTDAS2018.git
-scram b -j 4
+git clone https://github.com/phylsix/HLTHATS2018.git
+scram b -j 8
 ```
 
 And start Jupyter with this command:
