@@ -32,8 +32,8 @@ METTrigAnalyzerMiniAOD::METTrigAnalyzerMiniAOD(const edm::ParameterSet& ps)
   using namespace edm;
 
   processName_ = ps.getUntrackedParameter<std::string>("processName","HLT");
-  refTriggerName_ = ps.getUntrackedParameter<std::string>("refTriggerName","HLT_Ele27_eta2p1_WPTight_Gsf_v7");
-  sigTriggerName_ = ps.getUntrackedParameter<std::string>("sigTriggerName","HLT_PFMET170_HBHECleaned_v6");
+  refTriggerName_ = ps.getUntrackedParameter<std::string>("refTriggerName","HLT_Ele20_WPTight_Gsf_v4");
+  sigTriggerName_ = ps.getUntrackedParameter<std::string>("sigTriggerName","HLT_PFMET200_HBHECleaned_v5");
   triggerResultsToken_ = consumes<edm::TriggerResults> (ps.getUntrackedParameter<edm::InputTag>("triggerResultsTag", edm::InputTag("TriggerResults", "", "HLT")));
   pfMetToken_ = consumes<edm::View<pat::MET> >(ps.getUntrackedParameter<edm::InputTag>("pfMetInputTag_", edm::InputTag("slimmedMETs")));
   verbose_ = ps.getUntrackedParameter<bool>("verbose",false);
@@ -121,6 +121,18 @@ METTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventSetup&
   const unsigned int sigTriggerIndex(hltConfig_.triggerIndex(sigTriggerName_));
   assert(sigTriggerIndex==iEvent.triggerNames(*triggerResultsHandle_).triggerIndex(sigTriggerName_));
 
+  const TriggerNames& trigNames = iEvent.triggerNames(*triggerResultsHandle_);
+  //std::cout<<"_____________________________\n";
+  for (const auto& tn : trigNames.triggerNames()) {
+      if (tn.substr(0,7) == "HLT_Ele") {
+        if (triggerResultsHandle_->accept(hltConfig_.triggerIndex(tn))) {
+            std::cout<<tn<<" accepted!"<<std::endl;
+        }
+        //break;
+      }
+  }
+  std::cout<<"_____________________________\n";
+
   // abort on invalid trigger name
   if (refTriggerIndex>=ntrigs) {
     cout << "METTrigAnalyzerMiniAOD::analyzeTrigger: path "
@@ -129,7 +141,7 @@ METTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventSetup&
   }
   if (sigTriggerIndex>=ntrigs) {
     cout << "METTrigAnalyzerMiniAOD::analyzeTrigger: path "
-	 << sigTriggerName_ << " - not found!" << endl;
+     << sigTriggerName_ << " - not found!" << endl;
     return;
   }
 
