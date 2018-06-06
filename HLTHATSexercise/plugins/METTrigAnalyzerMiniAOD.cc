@@ -121,18 +121,6 @@ METTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventSetup&
   const unsigned int sigTriggerIndex(hltConfig_.triggerIndex(sigTriggerName_));
   assert(sigTriggerIndex==iEvent.triggerNames(*triggerResultsHandle_).triggerIndex(sigTriggerName_));
 
-  const TriggerNames& trigNames = iEvent.triggerNames(*triggerResultsHandle_);
-  //std::cout<<"_____________________________\n";
-  for (const auto& tn : trigNames.triggerNames()) {
-      if (tn.substr(0,7) == "HLT_Ele") {
-        if (triggerResultsHandle_->accept(hltConfig_.triggerIndex(tn))) {
-            std::cout<<tn<<" accepted!"<<std::endl;
-        }
-        //break;
-      }
-  }
-  std::cout<<"_____________________________\n";
-
   // abort on invalid trigger name
   if (refTriggerIndex>=ntrigs) {
     cout << "METTrigAnalyzerMiniAOD::analyzeTrigger: path "
