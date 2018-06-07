@@ -27,7 +27,7 @@ void plot_trigeff_singlemu (const TString& infile = "histos_SingleMuTrigAnalyzer
   c_pt->SetGrid(1,1);
   c_pt->cd();
 
-  TH2F* h_pt_axis = new TH2F("h_pt_axis",";p_{T} [GeV];Efficiency of HLT_IsoMu22",100,0,100,20,0,1);
+  TH2F* h_pt_axis = new TH2F("h_pt_axis",";p_{T} [GeV];Efficiency of HLT_IsoMu24",100,0,100,20,0,1);
   h_pt_axis->GetYaxis()->SetTitleOffset(0.98);
   h_pt_axis->Draw();
   
@@ -46,7 +46,7 @@ void plot_trigeff_singlemu (const TString& infile = "histos_SingleMuTrigAnalyzer
   c_eta->SetGrid(1,1);
   c_eta->cd();
 
-  TH2F* h_eta_axis = new TH2F("h_eta_axis",";#eta;Efficiency of HLT_IsoMu22",100,-3.,3.,20,0,1);
+  TH2F* h_eta_axis = new TH2F("h_eta_axis",";#eta;Efficiency of HLT_IsoMu24",100,-3.,3.,20,0,1);
   h_eta_axis->GetYaxis()->SetTitleOffset(0.98);
   h_eta_axis->Draw();
   
@@ -65,7 +65,7 @@ void plot_trigeff_singlemu (const TString& infile = "histos_SingleMuTrigAnalyzer
   c_phi->SetGrid(1,1);
   c_phi->cd();
 
-  TH2F* h_phi_axis = new TH2F("h_phi_axis",";#phi;Efficiency of HLT_IsoMu22",100,-3.14,3.14,20,0,1);
+  TH2F* h_phi_axis = new TH2F("h_phi_axis",";#phi;Efficiency of HLT_IsoMu24",100,-3.14,3.14,20,0,1);
   h_phi_axis->GetYaxis()->SetTitleOffset(0.98);
   h_phi_axis->Draw();
   

@@ -8,7 +8,7 @@
 
 #include "FWCore/Common/interface/TriggerNames.h"
 #include "FWCore/Common/interface/TriggerResultsByName.h"
-#include "HLTDAS2018/HLTDASexercise/interface/METTrigAnalyzerMiniAOD.h"
+#include "HLTHATS2018/HLTHATSexercise/interface/METTrigAnalyzerMiniAOD.h"
 
 #include "DataFormats/HLTReco/interface/TriggerObject.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
@@ -32,8 +32,8 @@ METTrigAnalyzerMiniAOD::METTrigAnalyzerMiniAOD(const edm::ParameterSet& ps)
   using namespace edm;
 
   processName_ = ps.getUntrackedParameter<std::string>("processName","HLT");
-  refTriggerName_ = ps.getUntrackedParameter<std::string>("refTriggerName","HLT_Ele27_eta2p1_WPTight_Gsf_v7");
-  sigTriggerName_ = ps.getUntrackedParameter<std::string>("sigTriggerName","HLT_PFMET170_HBHECleaned_v6");
+  refTriggerName_ = ps.getUntrackedParameter<std::string>("refTriggerName","HLT_Ele20_WPTight_Gsf_v4");
+  sigTriggerName_ = ps.getUntrackedParameter<std::string>("sigTriggerName","HLT_PFMET200_HBHECleaned_v5");
   triggerResultsToken_ = consumes<edm::TriggerResults> (ps.getUntrackedParameter<edm::InputTag>("triggerResultsTag", edm::InputTag("TriggerResults", "", "HLT")));
   pfMetToken_ = consumes<edm::View<pat::MET> >(ps.getUntrackedParameter<edm::InputTag>("pfMetInputTag_", edm::InputTag("slimmedMETs")));
   verbose_ = ps.getUntrackedParameter<bool>("verbose",false);
@@ -129,7 +129,7 @@ METTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventSetup&
   }
   if (sigTriggerIndex>=ntrigs) {
     cout << "METTrigAnalyzerMiniAOD::analyzeTrigger: path "
-	 << sigTriggerName_ << " - not found!" << endl;
+     << sigTriggerName_ << " - not found!" << endl;
     return;
   }
 

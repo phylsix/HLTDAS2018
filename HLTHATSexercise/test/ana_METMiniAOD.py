@@ -19,14 +19,18 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-#   fileNames = cms.untracked.vstring('/store/data/Run2016G/SingleMuon/MINIAOD/23Sep2016-v1/1110000/A2C0F697-B19C-E611-A4D8-F04DA275BFF2.root'),
-   fileNames = cms.untracked.vstring('/store/user/cmsdas/2017/short_exercises/Trigger/skim_dimu20_SingleMuon_2016G_ReReco_180k.root'), # skimmed file on EOS at LPC
+    #fileNames = cms.untracked.vstring('/store/data/Run2017D/SingleElectron/MINIAOD/31Mar2018-v1/100000/06300247-1239-E811-A8C5-A4BF01027688.root'), 
+    fileNames = cms.untracked.vstring('/store/user/cmsdas/2017/short_exercises/Trigger/skim_pfmet100_SingleElectron_2016G_ReReco_87k.root'), # skimmed file on EOS at LPC
 )
 
 
 process.options = cms.untracked.PSet(
 
 )
+
+#import FWCore.PythonUtilities.LumiList as LumiList
+#process.source.lumisToProcess = LumiList.LumiList(filename = 'Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.txt').getVLuminosityBlockRange()
+
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
@@ -38,16 +42,17 @@ process.configurationMetadata = cms.untracked.PSet(
 # Output definition
 
 process.TFileService = cms.Service("TFileService",
-                                       fileName = cms.string('histos_SingleMuTrigAnalyzer.root')
+                                       fileName = cms.string('histos_METTrigAnalyzer.root')
                                    )
 
 ### analyzer configuration
 
-process.singleMuTrigAnalyzerMiniAOD = cms.EDAnalyzer("SingleMuTrigAnalyzerMiniAOD")
-process.singleMuTrigAnalyzerMiniAOD.triggerName = cms.untracked.string("HLT_IsoMu24_v2")
-process.singleMuTrigAnalyzerMiniAOD.verbose = cms.untracked.bool(False)
+process.metTrigAnalyzerMiniAOD = cms.EDAnalyzer("METTrigAnalyzerMiniAOD")
+process.metTrigAnalyzerMiniAOD.refTriggerName = cms.untracked.string("HLT_Ele27_eta2p1_WPTight_Gsf_v7")
+process.metTrigAnalyzerMiniAOD.sigTriggerName = cms.untracked.string("HLT_PFMET170_HBHECleaned_v6")
+process.metTrigAnalyzerMiniAOD.verbose = cms.untracked.bool(False)
 
 process.GlobalTag.globaltag = "80X_dataRun2_2016SeptRepro_v3"
 
 # Path and EndPath definitions
-process.HLTanalyzers = cms.Path(process.singleMuTrigAnalyzerMiniAOD)
+process.HLTanalyzers = cms.Path(process.metTrigAnalyzerMiniAOD)

@@ -19,8 +19,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-#   fileNames = cms.untracked.vstring('/store/data/Run2016G/SingleElectron/MINIAOD/23Sep2016-v1/100000/004A7893-A990-E611-B29F-002590E7DE36.root'),
-   fileNames = cms.untracked.vstring('/store/user/cmsdas/2017/short_exercises/Trigger/skim_pfmet100_SingleElectron_2016G_ReReco_87k.root'), # skimmed file on EOS at LPC
+    fileNames = cms.untracked.vstring('/store/user/wsi/test/skim_dimu20_Run2017F_SingleMuon_ReReco_142k.root'),
+   #fileNames = cms.untracked.vstring('/store/user/cmsdas/2017/short_exercises/Trigger/skim_dimu20_SingleMuon_2016G_ReReco_180k.root'), # skimmed file on EOS at LPC
 )
 
 
@@ -38,17 +38,16 @@ process.configurationMetadata = cms.untracked.PSet(
 # Output definition
 
 process.TFileService = cms.Service("TFileService",
-                                       fileName = cms.string('histos_METTrigAnalyzer.root')
+                                       fileName = cms.string('histos_SingleMuTrigAnalyzer.root')
                                    )
 
 ### analyzer configuration
 
-process.metTrigAnalyzerMiniAOD = cms.EDAnalyzer("METTrigAnalyzerMiniAOD")
-process.metTrigAnalyzerMiniAOD.refTriggerName = cms.untracked.string("HLT_Ele27_eta2p1_WPTight_Gsf_v7")
-process.metTrigAnalyzerMiniAOD.sigTriggerName = cms.untracked.string("HLT_PFMET170_HBHECleaned_v6")
-process.metTrigAnalyzerMiniAOD.verbose = cms.untracked.bool(False)
+process.singleMuTrigAnalyzerMiniAOD = cms.EDAnalyzer("SingleMuTrigAnalyzerMiniAOD")
+process.singleMuTrigAnalyzerMiniAOD.triggerName = cms.untracked.string("HLT_IsoMu24_v10")
+process.singleMuTrigAnalyzerMiniAOD.verbose = cms.untracked.bool(False)
 
-process.GlobalTag.globaltag = "80X_dataRun2_2016SeptRepro_v3"
+process.GlobalTag.globaltag = "94X_dataRun2_ReReco_EOY17_v6"
 
 # Path and EndPath definitions
-process.HLTanalyzers = cms.Path(process.metTrigAnalyzerMiniAOD)
+process.HLTanalyzers = cms.Path(process.singleMuTrigAnalyzerMiniAOD)
