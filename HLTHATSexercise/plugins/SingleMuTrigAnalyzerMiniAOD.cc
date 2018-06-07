@@ -244,7 +244,7 @@ SingleMuTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventS
     // check if muon matches trigger
     bool trigmatch_tag = false;
     for (unsigned int itrig=0; itrig < trigMuons.size(); ++itrig) {
-      if (ROOT::Math::VectorUtil::DeltaR(muon_tag->p4(),trigMuons.at(itrig)) < dr_trigmatch) trigmatch_tag = true;
+      if (ROOT::Math::VectorUtil::DeltaR(muon_tag->p4(),trigMuons.at(itrig)) < dr_trigmatch) {trigmatch_tag = true; break;}
     }
     if (!trigmatch_tag) continue;
     if (verbose_) cout << "   - matched to trigger" << endl;
@@ -276,7 +276,7 @@ SingleMuTrigAnalyzerMiniAOD::analyze(const edm::Event& iEvent, const edm::EventS
       // check if probe muon matches trigger
       bool trigmatch_probe = false;
       for (unsigned int itrig=0; itrig < trigMuons.size(); ++itrig) {
-	if (ROOT::Math::VectorUtil::DeltaR(muon_probe->p4(),trigMuons.at(itrig)) < dr_trigmatch) trigmatch_probe = true;
+	    if (ROOT::Math::VectorUtil::DeltaR(muon_probe->p4(),trigMuons.at(itrig)) < dr_trigmatch) {trigmatch_probe = true; break;}
       }
 
       if (trigmatch_probe) fillHists(LorentzVector(muon_probe->p4()),"probe_pass");
